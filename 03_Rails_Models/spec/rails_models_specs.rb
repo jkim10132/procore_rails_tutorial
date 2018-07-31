@@ -5,7 +5,7 @@ describe "ProcoreUser Model" do
     expect(ProcoreUser).to be_a_kind_of(Class)
   end
   it 'should have name, age, email' do
-    expect(ProcoreUser.attributes).to include(:name, :age, :email)
+    expect(ProcoreUser.attribute_names).to include("name", "age", "email")
   end
 
   it 'should be invalid without a name and email' do
@@ -22,15 +22,15 @@ describe "Contract Model" do
     expect(Contract).to be_a_kind_of(Class)
   end
   it 'should have name, age, email' do
-    expect(Contract.attributes).to include(:description, :title, :status)
+    expect(Contract.attributes).to include("description", "title", "status")
   end
 
-  it 'should be invalid without a title and description and status' do
-    procore_user = Contract.new(name: nil, email: nil, status: nil)
+  it 'should be invalid without a title and description' do
+    procore_user = Contract.new(title: nil, description: nil)
     expect(procore_user).to_not be_valid
   end
   it 'is valid with valid attributes' do
-    procore_user = ProcoreUser.new(name: "Contract", description: "Contract Description", status: false)
+    procore_user = Contract.new(title: "Contract", description: "Contract Description", status: false)
     expect(procore_user).to be_valid
   end
 end
