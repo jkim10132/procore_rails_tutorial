@@ -11,7 +11,8 @@ require 'spec_helper'
 # "Just one item history!" respectively.
 
 describe "Checklist ItemHistory Controller" do
-  it 'test 1' do 
+  it 'should be a created controller' do
+    expect(ItemHistories).to be_a_kind_of(Class)
   end
   it 'test 2' do 
   end
