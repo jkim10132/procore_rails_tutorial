@@ -1,0 +1,2 @@
+class ItemHistory < ApplicationRecord
+end

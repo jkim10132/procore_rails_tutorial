@@ -3,6 +3,8 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.4.1'
 
+gem 'rails-controller-testing'
+
 gem 'pry'
 group :development, :test do
   gem 'rspec-rails', '~> 3.7'
