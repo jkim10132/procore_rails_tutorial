@@ -7,7 +7,7 @@ require 'rspec/core/rake_task'
 task :test_changes do
   g = Git.open('./')
   commit = g.object('HEAD')
-  diff = g.branches['origin/master'].gcommit
+  diff = g.object('HEAD~')
   committer = commit.author.email
   diff = g.diff(commit,diff).stats
   folder_diffs = []
