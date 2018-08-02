@@ -32,10 +32,23 @@ task :test_changes do
     http = Net::HTTP.new(uri.host, uri.port)
     res = http.request(req)
   end
-  
 end
 
-
+task :initiate_course do
+    RSpec::Core::RakeTask.new(:spec) do |t|
+          t.pattern = "*/spec/*.rb"
+          t.fail_on_error = false
+          t.rspec_opts = "--format json --out syllabus.json"
+          t.verbose = false
+    end
+    Rake::Task[:spec].execute
+    file = File.read('syllabus.json')
+    uri = URI('http://localhost:3000/initiate_course')
+    req = Net::HTTP::Post.new(uri, 'Content-Type' => 'application/json')
+    req.body = JSON.parse(file).merge({course_name: File.basename(Dir.getwd)}).to_json
+    http = Net::HTTP.new(uri.host, uri.port)
+    res = http.request(req)
+  end
 task :default => [:test_changes]
 
 # Rake::Task["test_changes"].invoke
