@@ -6,8 +6,9 @@ require 'net/http'
 require 'rspec/core/rake_task'
 task :test_changes do
   g = Git.open('./')
-  commit = g.object('HEAD')
-  diff = g.object('HEAD~')
+  commits = g.log
+  commit = commits.first
+  diff = commits[1]
   committer = commit.author.email
   diff = g.diff(commit,diff).stats
   folder_diffs = []
