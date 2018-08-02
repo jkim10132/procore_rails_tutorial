@@ -1,5 +1,5 @@
-require 'spec_helper'
-require 'rails_helper'
+require_relative 'spec_helper.rb'
+require_relative 'rails_helper.rb'
 
 # ADD TO README LATER:
 # For this challenge you must create the Rails controller for
