@@ -12,7 +12,6 @@ task :test_changes do
   committer = commit.author.email
   diff = g.diff(commit,diff).stats
   folder_diffs = []
-  binding.pry
   diff[:files].each do |file, data|
     folder_diffs << /^\w[^\/]*/.match(file).to_s
   end
