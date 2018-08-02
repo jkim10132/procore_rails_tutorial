@@ -5,9 +5,4 @@ def two_sum(arr,target)
   # the target. Return [nil,nil] otherwise.
   # Must be in order of low to high.
     # Example: two_sum([1,2,3], 3) = [0,1]
-  h = {}
-  arr.each_with_index do |x,i|
-    h[target - x]
-  end
-  return [nil,nil]
 end
