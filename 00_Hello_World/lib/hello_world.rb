@@ -1,4 +1,4 @@
 def hello_world
   #TODO print "Hello World"
-  print "hello World"
+  print "Hello World"
 end
