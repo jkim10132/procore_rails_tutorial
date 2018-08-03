@@ -18,7 +18,7 @@ task :test_changes do
   folder_diffs.uniq.reject(&:empty?).each do |folder|
     begin
       RSpec::Core::RakeTask.new(:spec) do |t|
-        t.pattern = folder+"/spec/*.rb"
+        t.pattern = folder+"*/spec/*.rb"
         t.fail_on_error = false
         t.rspec_opts = "--format json --out results.json"
         t.verbose = false
