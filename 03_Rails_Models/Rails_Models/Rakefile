@@ -12,7 +12,8 @@ begin
         t.pattern = "./spec/*.rb"
         t.fail_on_error = false
         t.rspec_opts = "--format documentation"
-      end
+        t.verbose = false
+    end
 
   task :default => :spec
 rescue LoadError
