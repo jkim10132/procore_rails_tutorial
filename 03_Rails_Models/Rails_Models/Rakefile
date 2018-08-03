@@ -3,11 +3,8 @@
 
 require_relative 'config/application'
 
-Rails.application.load_tasks
-
+require 'rspec/core/rake_task'
 begin
-  require 'rspec/core/rake_task'
-
    RSpec::Core::RakeTask.new(:spec) do |t|
         t.pattern = "./spec/*.rb"
         t.fail_on_error = false
