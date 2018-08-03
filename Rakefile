@@ -6,8 +6,9 @@ require 'net/http'
 require 'rspec/core/rake_task'
 task :test_changes do
   g = Git.open('./')
-  commit = g.object('HEAD')
-  diff = g.object('HEAD~')
+  commits = g.log
+  commit = commits.first
+  diff = commits[1]
   committer = commit.author.email
   diff = g.diff(commit,diff).stats
   folder_diffs = []
@@ -40,7 +41,7 @@ task :initiate_course do
       RSpec::Core::RakeTask.new(:spec) do |t|
             t.pattern = folder + "spec/*.rb"
             t.fail_on_error = false
-            t.rspec_opts = "--format json --out syllabus.json"
+            t.rspec_opts = "--format json --out syllabus.json --exclude-pattern '**/spec/*_helper.rb'"
             t.verbose = false
       end
       Rake::Task[:spec].execute
