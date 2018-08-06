@@ -38,16 +38,15 @@ task :test_changes do
         Rails.application.load_tasks
         begin
             RSpec::Core::RakeTask.new(:rails_spec) do |t|
-              # t.pattern = "/spec"
+              t.pattern = "/spec"
               t.fail_on_error = false
-              # t.rspec_opts = "--format json --out  results.json"
+              t.rspec_opts = "--format json --out  results.json"
               t.verbose = false
             end
         rescue LoadError
         end
         Rake::Task[:rails_spec].execute
       end
-      binding.pry
       file = File.read('results.json')
       uri = URI('http://localhost:3000/retrieve_challenge_data')
       req = Net::HTTP::Post.new(uri, 'Content-Type' => 'application/json')
