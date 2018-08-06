@@ -10,12 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180803212341) do
+ActiveRecord::Schema.define(version: 20180806224112) do
 
   create_table "procore_users", force: :cascade do |t|
-    t.string "name"
-    t.integer "age"
-    t.string "email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
