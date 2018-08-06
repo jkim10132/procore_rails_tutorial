@@ -1,5 +1,4 @@
 require_relative 'spec_helper'
-
 describe "ProcoreUser Model" do
   it 'should be a created Model' do
     expect(ProcoreUser).to be_a_kind_of(Class)
