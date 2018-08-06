@@ -37,23 +37,27 @@ task :test_changes do
         require './config/application'
         Rails.application.load_tasks
         begin
-            RSpec::Core::RakeTask.new(:rails_spec) do |t|
-              t.pattern = "/spec"
-              t.fail_on_error = false
-              t.rspec_opts = "--format json --out  results.json"
-              t.verbose = false
-            end
+          RSpec::Core::RakeTask.new(:rails_spec) do |t|
+            t.pattern ="spec/*.rb"
+            t.fail_on_error = false
+            t.rspec_opts = "--format json --out  results.json"
+            t.verbose = false
+          end
         rescue LoadError
         end
         Rake::Task[:rails_spec].execute
       end
-      file = File.read('results.json')
+      file = File.read("./"+folder+"/"+folder[3..-1]+'/results.json')
       uri = URI('http://localhost:3000/retrieve_challenge_data')
       req = Net::HTTP::Post.new(uri, 'Content-Type' => 'application/json')
-      req.body = JSON.parse(file).merge({committer: committer}).to_json
+      req.body = JSON.parse(file).merge({committer: committer})
+      req.body["examples"].each do |example|
+        example["id"] = "./"+folder+"/"+folder[3..-1]+example["id"][1..-1]
+      end
+      req.body = req.body.to_json
       http = Net::HTTP.new(uri.host, uri.port)
       res = http.request(req)
-      File.delete("results.json")
+      File.delete("./"+folder+"/"+folder[3..-1]+'/results.json')
     end
   end
 end
