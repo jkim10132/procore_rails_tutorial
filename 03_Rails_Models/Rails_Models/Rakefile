@@ -6,16 +6,19 @@ require_relative 'config/application'
 Rails.application.load_tasks
 
 begin
+  Rake::Task[:spec].clear
+  require 'rake'
   require 'rspec/core/rake_task'
-
-   RSpec::Core::RakeTask.new(:local_spec) do |t|
+  task :test do
+   RSpec::Core::RakeTask.new(:rawr) do |t|
         t.pattern = "./spec/*.rb"
         t.fail_on_error = false
         t.rspec_opts = "--format documentation"
         t.verbose = false
     end
-
-  task :default => :local_spec
+    Rake::Task[:rawr].execute
+  end
+  task :default => :test
 rescue LoadError
   # no rspec available
 end
