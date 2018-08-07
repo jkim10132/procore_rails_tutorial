@@ -1,0 +1,2 @@
+class ProcoreUser < ApplicationRecord
+end
